@@ -50,6 +50,7 @@ function login2(user) {
       response.json().then((data) => {
         console.log(data);
       })
+      //window.location = `/user/html?id=`;
     })
     .catch( error => {
       // note error.text() will return a promise
