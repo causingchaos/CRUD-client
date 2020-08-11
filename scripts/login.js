@@ -40,7 +40,7 @@ function login2(user) {
     body: `email=${user.email}&password=${user.password}`
   })
     .then( response => {
-      if(!response.ok) { 
+      if(!response.ok) {
         throw response 
       }  // server error 500, 200, ect.
       return response; // we only get here if there is no error
@@ -53,7 +53,12 @@ function login2(user) {
       //window.location = `/user/html?id=`;
     })
     .catch( error => {
+      const $errorMessage = $('#errorMessage');
       // note error.text() will return a promise
-      error.text().then( errorMessage => console.log(errorMessage) );
+      error.text().then( errorMessage => {
+        console.log(errorMessage);
+        $errorMessage.text(errorMessage);
+        $errorMessage.show();
+        });
     })
 }
