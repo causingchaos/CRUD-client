@@ -1,4 +1,4 @@
-const API_URL = getHostURL();
+//const API_URL = getHostURL(); 
 
 $(document).ready(function () {
   // get user id from url query

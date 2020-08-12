@@ -19,7 +19,6 @@ $(() => {
         console.error(error)
         $errorMessage.text(error.responseJSON.message);
         $errorMessage.show();
-        
     });
     */
   });
@@ -46,18 +45,22 @@ function login2(user) {
       return response; // we only get here if there is no error
     })
     .then(response => {
+      console.log(response.id);
       console.log('display result');
       response.json().then((data) => {
         console.log(data);
+        console.log(data.id);
+        window.location = `/user.html?id=${data.id}`;
       })
+      
       //window.location = `/user/html?id=`;
     })
     .catch( error => {
       const $errorMessage = $('#errorMessage');
-      // note error.text() will return a promise
-      error.text().then( errorMessage => {
+      error.json().then( errorMessage => { // error.json() returns a promise.
         console.log(errorMessage);
-        $errorMessage.text(errorMessage);
+        console.log(errorMessage.message);
+        $errorMessage.text(errorMessage.message);
         $errorMessage.show();
         });
     })
