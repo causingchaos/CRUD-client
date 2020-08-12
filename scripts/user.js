@@ -3,6 +3,8 @@
 $(document).ready(function () {
   // get user id from url query
   const params = parseQuery(window.location.search);
+  console.log("params of this api request are:")
+  console.log(params);
   // make a request to the server for the user information
   getUserInfo(params.id)
     .then(addUserInfoToPage)
@@ -23,11 +25,13 @@ function parseQuery(query) {
 }
 
 function getUserInfo(id) {
+  console.log("getting user info")
   console.log(`${API_URL}/user/${id}`)
   return $.get(`${API_URL}/user/${id}`)
 }
 
 function getStickers(id) {
+  console.log("getting user stickers")
   return $.get(`${API_URL}/user/${id}/sticker`)
 }
 
