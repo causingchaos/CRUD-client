@@ -7,3 +7,16 @@ function getHostURL() {
     return 'https://sticker-mania.herokuapp.com';
   }
 }
+
+function getUserFromForm(){
+
+  const email = $('#email').val();
+  const password = $('#password').val();
+
+  const user = {
+    email,
+    password,
+  }
+
+  return user;
+}

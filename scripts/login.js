@@ -3,14 +3,8 @@ const AUTH_URL = `${API_URL}/auth`;
 $(() => {
   $('form').submit((event) => {
     event.preventDefault();
-    console.log('submitted');
-    const email = $('#email').val();
-    const password = $('#password').val();
+    const user = getUserFromForm();
 
-    const user = {
-      email,
-      password,
-    }
      login2(user)
      /* .then(result => {
         console.log(result);

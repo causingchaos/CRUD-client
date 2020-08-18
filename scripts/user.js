@@ -10,7 +10,8 @@ $(document).ready(function () {
     .then(addUserInfoToPage)
     .then(getStickers)
     .then(addStickers)
-    .catch(weSuck);
+    //.catch(weSuck);
+    .catch(handleError)
   // show user information
   // make a request to server for the stickers for the user with that id
   // show user stickers
@@ -27,6 +28,10 @@ function parseQuery(query) {
 function getUserInfo(id) {
   console.log("getting user info")
   console.log(`${API_URL}/user/${id}`)
+  
+  var x = document.cookie;
+  console.log(x);
+
   return $.get(`${API_URL}/user/${id}`)
 }
 
@@ -54,7 +59,10 @@ function addStickers(stickers) {
   $('.stickers').html(html);
 }
 
-function weSuck() {
-  alert('user not found... and we suck')
+//function weSuck() {
+  //alert('user not found... and we suck')
+//}
+function handleError(error) {
+  console.log(error);
+  //window.location = '/login.html';
 }
-
