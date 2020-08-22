@@ -2,6 +2,7 @@ const AUTH_URL = `${API_URL}/auth`;
 
 $(() => {
   $('form').submit((event) => {
+    console.log('preventing event default')
     event.preventDefault();
     const user = getUserFromForm();
 

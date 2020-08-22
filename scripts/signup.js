@@ -2,6 +2,7 @@ const AUTH_URL = `${API_URL}/auth`;
 
 $(() => {
   $('form').submit((event) => {
+    console.log("signup working??")
     event.preventDefault();  
     const user = getUserFromForm();
     signup(user);
@@ -9,6 +10,7 @@ $(() => {
 });
 
 function signup(user) {
+  console.log("signing the user up")
   fetch(`${AUTH_URL}/signup`, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -33,6 +35,7 @@ function signup(user) {
     })
   })
   .catch( error => {
+    console.log("there has been an error");
     const $errorMessage = $('#errorMessage')
     error.json().then( errorMessage => {
       console.log(errorMessage);

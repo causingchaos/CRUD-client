@@ -1,10 +1,10 @@
 console.log("hello world")
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('btnSet').addEventListener('click', fSet);
-  document.getElementById('btnAdd').addEventListener('click',fAdd);
-  document.getElementById('btnDelete').addEventListener('click',fDelete);
-  let pre = document.getElementById('output');
-  pre.textContent = document.cookie;
+  //document.getElementById('btnSet').addEventListener('click', fSet);
+  //document.getElementById('btnAdd').addEventListener('click',fAdd);
+  //document.getElementById('btnDelete').addEventListener('click',fDelete);
+  //let pre = document.getElementById('output');
+  //pre.textContent = document.cookie;
 })
 
 const API_URL = getHostURL();
@@ -20,7 +20,9 @@ function getHostURL() {
 function getUserFromForm(){
 
   const email = $('#email').val();
+  console.log(email)
   const password = $('#password').val();
+  console.log(password);
 
   const user = {
     email,
