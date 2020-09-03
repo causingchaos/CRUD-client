@@ -37,6 +37,7 @@ function login2(user) {
       if(!response.ok) {
         throw response 
       }  // server error 500, 200, ect.
+      console.log('response is okay')
       return response; // we only get here if there is no error
     })
     .then(response => {

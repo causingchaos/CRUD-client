@@ -6,10 +6,10 @@ $(document).ready(function () {
   console.log("params of this api request are:")
   console.log(params);
   // make a request to the server for the user information
-  getUserInfo(params.id)
-    .then(addUserInfoToPage)
-    .then(getStickers)
-    .then(addStickers)
+  getUserInfo2(params.id)
+    //.then(addUserInfoToPage)
+    //.then(getStickers)
+    //.then(addStickers)
     //.catch(weSuck);
     .catch(handleError)
   // show user information
@@ -33,6 +33,30 @@ function getUserInfo(id) {
   console.log(x);
 
   return $.get(`${API_URL}/user/${id}`)
+}
+
+function getUserInfo2(id){
+  console.log("fetching the request")
+  fetch(`${API_URL}/user/${id}`, {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      "Access-Control-Allow-Origin": "http://localhost:8080",
+    },
+    credentials: "include",
+    method: "get",
+  })
+  .then( response => {
+    if(!response.ok) {
+      throw response;
+    }
+    return response;
+  })
+  .then( response => {
+    response.json().then((data) => {
+      console.log("data of the user is:")
+      console.log(data);
+    })
+  })
 }
 
 function getStickers(id) {
@@ -63,6 +87,7 @@ function addStickers(stickers) {
   //alert('user not found... and we suck')
 //}
 function handleError(error) {
+  console.log("there has been an error");
   console.log(error);
   //window.location = '/login.html';
 }
