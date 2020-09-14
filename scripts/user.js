@@ -6,11 +6,10 @@ $(document).ready(function () {
   console.log("params of this api request are:")
   console.log(params);
   // make a request to the server for the user information
-  getUserInfo2(params.id)
-    //.then(addUserInfoToPage)
-    //.then(getStickers)
-    //.then(addStickers)
-    //.catch(weSuck);
+  getUserInfo3(params.id)
+    .then(addUserInfoToPage)
+    .then(getStickers2)
+    .then(addStickers)
     .catch(handleError)
   // show user information
   // make a request to server for the stickers for the user with that id
@@ -27,17 +26,15 @@ function parseQuery(query) {
 
 function getUserInfo(id) {
   console.log("getting user info")
+  console.log('id');
   console.log(`${API_URL}/user/${id}`)
-  
   var x = document.cookie;
   console.log(x);
-
   return $.get(`${API_URL}/user/${id}`)
 }
 
-function getUserInfo2(id){
-  console.log("fetching the request")
-  fetch(`${API_URL}/user/${id}`, {
+function getUserInfo3(id){
+  return fetch(`${API_URL}/user/${id}`, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
       "Access-Control-Allow-Origin": "http://localhost:8080",
@@ -45,17 +42,9 @@ function getUserInfo2(id){
     credentials: "include",
     method: "get",
   })
-  .then( response => {
-    if(!response.ok) {
-      throw response;
-    }
-    return response;
-  })
-  .then( response => {
-    response.json().then((data) => {
-      console.log("data of the user is:")
-      console.log(data);
-    })
+  .then((res) => res.json())
+  .then((content) =>  {
+    return content; //return the data promise
   })
 }
 
@@ -64,7 +53,26 @@ function getStickers(id) {
   return $.get(`${API_URL}/user/${id}/sticker`)
 }
 
+function getStickers2(id) {
+  console.log("getting user stickers")
+  return fetch(`${API_URL}/user/${id}/sticker`, {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      "Access-Control-Allow-Origin": "http://localhost:8080",
+    },
+    credentials: "include",
+    method: "get",
+  })
+  .then((res) => res.json())
+  .then((content) => {
+    console.log(content);
+    return content;
+  })
+}
+
 function addUserInfoToPage(user) {
+  console.log('Inside add user Info to page function')
+  console.log(user);
   let source = $("#user-template").html();
   let template = Handlebars.compile(source);
   let context = user;
@@ -83,11 +91,9 @@ function addStickers(stickers) {
   $('.stickers').html(html);
 }
 
-//function weSuck() {
-  //alert('user not found... and we suck')
-//}
 function handleError(error) {
   console.log("there has been an error");
   console.log(error);
-  //window.location = '/login.html';
+  console.error;
+  window.location = '/login.html';
 }
