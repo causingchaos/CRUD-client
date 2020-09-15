@@ -47,20 +47,20 @@ function getUserInfo3(id){
       return res.json();
     }else{
       //throw new Error('Something went wrong'); // ??? proper stucture ??
-      //throw Error(res.statusText);
-      return res.json();
+      throw Error(res.statusText);
+      //return res.json();
     }
   })
   .then((content) =>  {
-    console.log('displaying content');
-    console.log(content);
-    if (content.error){
-      console.log("error found");  // custom errors here, otherwise use the throw error above from headers
-      throw Error(content.message); // probably don't need custom errors here, b/c it will redirect
-    } else {
+    //console.log('displaying content');
+    //console.log(content);
+    //if (content.error){
+    //  console.log("error found");  // custom errors here, otherwise use the throw error above from headers
+    //  throw Error(content.message); // probably don't need custom errors here, b/c it will redirect
+    //} else {
       addUserInfoToPage(content);
       return content; //return the data promise
-    }
+   // }
   })
   //.catch(error => console.log(error))
 }
