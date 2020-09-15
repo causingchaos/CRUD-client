@@ -1,5 +1,7 @@
 const AUTH_URL = `${API_URL}/auth`;
 
+redirectIfLoggedIn();
+
 $(() => {
   $('form').submit((event) => {
     console.log("signup working??")

@@ -7,9 +7,9 @@ $(document).ready(function () {
   console.log(params);
   // make a request to the server for the user information
   getUserInfo3(params.id)
-    .then(addUserInfoToPage)
-    .then(getStickers2)
-    .then(addStickers)
+    //.then(addUserInfoToPage)
+    //.then(getStickers2)
+    //.then(addStickers)
     .catch(handleError)
   // show user information
   // make a request to server for the stickers for the user with that id
@@ -42,10 +42,27 @@ function getUserInfo3(id){
     credentials: "include",
     method: "get",
   })
-  .then((res) => res.json())
-  .then((content) =>  {
-    return content; //return the data promise
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }else{
+      //throw new Error('Something went wrong'); // ??? proper stucture ??
+      //throw Error(res.statusText);
+      return res.json();
+    }
   })
+  .then((content) =>  {
+    console.log('displaying content');
+    console.log(content);
+    if (content.error){
+      console.log("error found");  // custom errors here, otherwise use the throw error above from headers
+      throw Error(content.message); // probably don't need custom errors here, b/c it will redirect
+    } else {
+      addUserInfoToPage(content);
+      return content; //return the data promise
+    }
+  })
+  //.catch(error => console.log(error))
 }
 
 function getStickers(id) {
@@ -55,6 +72,8 @@ function getStickers(id) {
 
 function getStickers2(id) {
   console.log("getting user stickers")
+  console.log("api url:");
+  console.log(API_URL)
   return fetch(`${API_URL}/user/${id}/sticker`, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -94,6 +113,7 @@ function addStickers(stickers) {
 function handleError(error) {
   console.log("there has been an error");
   console.log(error);
-  console.error;
-  window.location = '/login.html';
+  console.log(error.message);
+  //console.error;
+  //window.location = '/login.html';
 }

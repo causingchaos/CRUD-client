@@ -1,5 +1,7 @@
 const AUTH_URL = `${API_URL}/auth`;
 
+redirectIfLoggedIn();
+
 $(() => {
   $('form').submit((event) => {
     console.log('preventing event default')
@@ -46,6 +48,8 @@ function login2(user) {
       response.json().then((data) => {
         console.log(data);
         console.log(data.id);
+        console.log('storing local session with ' + data.id);
+        localStorage.user_id = data.id;
         window.location = `/user.html?id=${data.id}`;
       })
       
