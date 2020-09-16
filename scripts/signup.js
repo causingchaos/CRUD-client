@@ -33,7 +33,8 @@ function signup(user) {
     result.json().then( data => {
       console.log(data);
       console.log(data.id);
-      window.location = `/user.html?id=${data.id}`
+      localStorage.user_id = data.id;
+      window.location = `/user.html?id=${data.id}`;
     })
   })
   .catch( error => {

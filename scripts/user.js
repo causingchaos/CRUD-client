@@ -115,5 +115,5 @@ function handleError(error) {
   console.log(error);
   console.log(error.message);
   //console.error;
-  //window.location = '/login.html';
+  window.location = '/login.html';
 }

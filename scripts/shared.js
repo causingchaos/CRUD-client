@@ -1,13 +1,14 @@
 console.log("hello world")
 document.addEventListener('DOMContentLoaded', () => {
-  //document.getElementById('btnSet').addEventListener('click', fSet);
-  //document.getElementById('btnAdd').addEventListener('click',fAdd);
-  //document.getElementById('btnDelete').addEventListener('click',fDelete);
-  //let pre = document.getElementById('output');
-  //pre.textContent = document.cookie;
+  document.getElementById('btnSet').addEventListener('click', fSet);
+  document.getElementById('btnAdd').addEventListener('click',fAdd);
+  document.getElementById('btnDelete').addEventListener('click',fDelete);
+  let pre = document.getElementById('output');
+  pre.textContent = document.cookie;
 })
 
 const API_URL = getHostURL();
+const AUTH_URL = `${API_URL}/auth`;
 
 function getHostURL() {
   if (window.location.host.indexOf('localhost') != -1) {
@@ -56,6 +57,7 @@ function fAdd(){
   let req = new Request(url, {
     mode: 'cors',   // just a safe guard indicating our intentions of what to allow
     credentials: 'include', //when will the cookies and authorization header be sent
+    
   });
   //return resp.json();
 
@@ -100,6 +102,23 @@ function fDelete() {
 
 function redirectIfLoggedIn(){
   if(localStorage.user_id) {
-    window.location = `/user.html?id=${localStorage.user_id}`;
+    //window.location = `/user.html?id=${localStorage.user_id}`;
   }
 }
+
+function logout() {
+  localStorage.removeItem('user_id');
+  fetch(`${AUTH_URL}/logout`, {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+      "Access-Control-Allow-Origin": "http://localhost:8080",
+    },
+    credentials: "include",
+    method: "get",
+  }).then((res) => {
+    return res.json();
+  })
+  .then((content) => {
+    console.log(content);
+  })
+};
