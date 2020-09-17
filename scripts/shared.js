@@ -1,10 +1,10 @@
 console.log("hello world")
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('btnSet').addEventListener('click', fSet);
-  document.getElementById('btnAdd').addEventListener('click',fAdd);
-  document.getElementById('btnDelete').addEventListener('click',fDelete);
-  let pre = document.getElementById('output');
-  pre.textContent = document.cookie;
+  //document.getElementById('btnSet').addEventListener('click', fSet);
+  //document.getElementById('btnAdd').addEventListener('click',fAdd);
+  //document.getElementById('btnDelete').addEventListener('click',fDelete);
+  //let pre = document.getElementById('output');
+  //pre.textContent = document.cookie;
 })
 
 const API_URL = getHostURL();
@@ -12,9 +12,10 @@ const AUTH_URL = `${API_URL}/auth`;
 
 function getHostURL() {
   if (window.location.host.indexOf('localhost') != -1) {
-    return 'http://localhost:3000';
+    //return 'http://localhost:3000';
+    return 'https://crud-stickerss-api.herokuapp.com'
   } else {
-    return 'https://sticker-mania.herokuapp.com';
+    return 'https://crud-stickerss-api.herokuapp.com';
   }
 }
 

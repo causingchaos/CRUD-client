@@ -1,4 +1,4 @@
-const AUTH_URL = `${API_URL}/auth`;
+//const AUTH_URL = `${API_URL}/auth`;
 
 redirectIfLoggedIn();
 
